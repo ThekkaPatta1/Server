@@ -10,11 +10,11 @@ const Bid = mongoose.model('Bid',{
         required:true
     },
     Bidprice:{
-        type:String,
+        type:Number,
         required:true
     },
     Worktime:{
-        type:String,
+        type:Number,
         required:true
     }
 })
