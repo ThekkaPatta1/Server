@@ -25,4 +25,4 @@ app.use(Admin_route);
 
 
 
-app.listen(550);
+app.listen(process.env.PORT);   
