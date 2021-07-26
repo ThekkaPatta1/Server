@@ -19,14 +19,7 @@ app.use(express.json());
 app.use('/Images', express.static(__dirname + "/Images"))
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}))
-
-<<<<<<< HEAD
-// app.use('/',(req, res) =>{
-//     res.send("ROOT");
-// })
-=======
->>>>>>> development
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(Loginuser_route);
 app.use(Loginworker_route);
 app.use(workpost_route);
