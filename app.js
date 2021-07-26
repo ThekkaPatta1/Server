@@ -10,6 +10,7 @@ const Loginuser_route = require('./routes/Loginuser_route');
 const Loginworker_route = require('./routes/Loginworker_route');
 const workpost_route = require('./routes/workpost_route');
 const bid_route= require('./routes/bid_route');
+const Admin_route =require("./routes/Admin_route");
 const app = express();
 connectDB();
 
@@ -24,6 +25,8 @@ app.use(Loginuser_route);
 app.use(Loginworker_route);
 app.use(workpost_route);
 app.use(bid_route);
+app.use(Admin_route);
 
 
-app.listen(550);
+
+app.listen(process.env.PORT);   
