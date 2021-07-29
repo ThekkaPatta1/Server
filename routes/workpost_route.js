@@ -67,6 +67,8 @@ router.get('/work/single/:id', function(req,res){
 })
 })
 
+
+
 // for delete
 router.delete('/work/delete/:id', auth.verifyUser, function (req, res) {
     //delete code
