@@ -101,7 +101,6 @@ router.get('/user/single/:id', function(req,res){
     //console.log(req.body)
     User.findOne({_id : req.params.id})
     .then(function(data){
-    console.log(data);
         res.status(200).json(data);
 })
 .catch(function(e){
