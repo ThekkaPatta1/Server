@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react'
+// import {useEffect, useState} from 'react'
 
-const PREFIX = 'messenger'
+// const PREFIX = 'messenger'
 
-export default function localStorage(key, initialvalue)
-{
-    return(
-        <div>
+// export default function localStorage(key, initialvalue)
+// {
+//     return(
+//         <div>
 
-        </div>
-    )
-}
+//         </div>
+//     )
+// }
