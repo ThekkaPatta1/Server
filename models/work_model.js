@@ -13,6 +13,10 @@ const Work = mongoose.model('Work',{
         type : String,
         required: true
     },
+    WorkTitle:{
+        type:String,
+        required: true
+    },
     Workdescription:{
         type : String,
         required:true
@@ -20,6 +24,5 @@ const Work = mongoose.model('Work',{
     Wimage:{
         type: String
     }
-
 })
 module.exports = Work;

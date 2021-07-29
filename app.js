@@ -9,6 +9,8 @@ const connectDB  = require('./database/db');
 const Loginuser_route = require('./routes/Loginuser_route');
 const Loginworker_route = require('./routes/Loginworker_route');
 const workpost_route = require('./routes/workpost_route');
+const bid_route = require('./routes/bid_route')
+const work_route =  require('./routes/work_route');
 const app = express();
 connectDB();
 
@@ -20,6 +22,9 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(Loginuser_route);
 app.use(Loginworker_route);
 app.use(workpost_route);
+app.use(work_route);
+app.use(bid_route);
+
 
 
 

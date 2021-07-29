@@ -1,13 +1,11 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
-const bcryptjs = require('bcryptjs');
-const Work = require('../models/bid_model');
-const jwt = require('jsonwebtoken');
+const Bid = require('../models/bid_model');
 const router = express.Router();
 const upload = require('../Middleware/Upload');
 
 //bidding work 
-router.post('/bid/post',function (req, res) {
+router.post('/bid',upload.fields([]),function (req, res) {
     console.log(req.body)
     const errors = validationResult(req);
 
