@@ -123,7 +123,7 @@ router.post('/user/update/:_id', function (req, res) {
     const _id = req.params._id;
     const UFullName = req.body.UFullName;
     const UAddress = req.body.UAddress;
-    const UPhoneNo = req.body.PhoneNo;
+    const UPhoneNo = req.body.UPhoneNo;
     const UUsername = req.body.UUsername;
     const UPassword = req.body.UPassword;
     User.updateOne({ _id: _id }, { UFullName:UFullName, UAddress:UAddress,UPhoneNo:UPhoneNo,UUsername: UUsername,UPassword:UPassword })
