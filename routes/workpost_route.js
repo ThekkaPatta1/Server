@@ -26,7 +26,7 @@ router.post('/work/post', upload.single('Wimage'),function (req, res) {
                 PhoneNo: PhoneNo,
                 Workdescription: Workdescription,
                 WorkTitle:WorkTitle,
-                Wimage:"/"+req.file.filename,
+                Wimage:"/Images"+req.file.filename,
             });
             data.save()
                 .then(function (result) {
