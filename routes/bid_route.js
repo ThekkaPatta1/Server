@@ -39,4 +39,14 @@ router.post('/bid/post',upload.fields([]), (req, res)=>{
             res.status(400).json(errors.array());
 }
 })
+
+router.get('/worker/bidder/:id',(req,res)=>{
+    console.log('hello mf')
+    Bid.find({Wid:req.params.id}).then(data=>{
+        res.status(200).json({data})
+        console.log(data)
+    }).catch(err=>{
+        res.status(400).json({error:err})
+    })
+})
 module.exports = router;

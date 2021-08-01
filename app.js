@@ -32,5 +32,5 @@ app.use(Rate_route);
 app.use(work_route);
 
 
-app.listen(process.env.PORT);
+app.listen(550);
 // app.listen(process.env.PORT);   

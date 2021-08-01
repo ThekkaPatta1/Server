@@ -13,7 +13,7 @@ const auth = require('../Middleware/Authenticate')
 router.get('/works/posted/:un',(req,res)=>{
     Work.find({Username:req.params.un}).then(data=>{
         res.status(200).json({
-            data
+            data 
         })
     }).catch(err=>{
         res.status(400).json({error:err})
