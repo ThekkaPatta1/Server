@@ -31,7 +31,7 @@ router.post('/worker/insert',  upload.single('Wimage'), function (req, res) {
                 WSkills: WSkills,
                 WUsername: WUsername,
                 WPassword: hash,                
-                Wimage:"/Images" + req.file.filename,
+                Wimage:"/"+ req.file.filename,
                 // Certifyimage:"/"+req.file.filename
                 
             })
