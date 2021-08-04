@@ -1,17 +1,11 @@
-// const { Socket } = require("dgram");
-// var express = require("express")
-// var app = express();
+const PORT = process.env.PORT || 500
 
-// var http = require("http").createserver(app);
-// var io = require("socket.io")(http);
+const  Server  = app.liste(PORT, ()=>{
+    console.log(`Listening to the port ${PORT}`)
+})
 
-// http.listen(500,function(){
-//     console.log("connected");
-//     io.on ("connection", function (shocket){
-//         console.log ("User" + Socket.id);
+const io = require('socket.io')(Server)
 
-//         Socket.on("notification", function(bid){
-//             Socket.broadcast.emit("notification", bid);
-//         });
-//     });
-// });
+io.on('connection',()=>{
+    
+})

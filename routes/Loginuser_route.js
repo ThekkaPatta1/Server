@@ -101,7 +101,6 @@ router.get('/user/single/:id', function(req,res){
     //console.log(req.body)
     User.findOne({_id : req.params.id})
     .then(function(data){
-    console.log(data);
         res.status(200).json(data);
 })
 .catch(function(e){
@@ -122,12 +121,12 @@ router.delete('/user/delete/:id', auth.verifyUser, function (req, res) {
 router.post('/user/update/:_id', function (req, res) {
     console.log(req.body)
     const _id = req.params._id;
-    const FullName = req.body.FullName;
-    const Address = req.body.Address;
-    const PhoneNo = req.body.PhoneNo;
-    const Username = req.body.Username;
-    const Password = req.body.Password;
-    User.updateOne({ _id: _id }, { FullName:FullName, Address:Address,PhoneNo:PhoneNo,Username: Username,Password:Password })
+    const UFullName = req.body.UFullName;
+    const UAddress = req.body.UAddress;
+    const UPhoneNo = req.body.UPhoneNo;
+    const UUsername = req.body.UUsername;
+    const UPassword = req.body.UPassword;
+    User.updateOne({ _id: _id }, { UFullName:UFullName, UAddress:UAddress,UPhoneNo:UPhoneNo,UUsername: UUsername,UPassword:UPassword })
     .then(function () {
         res.status(200).json({message : true})
     })

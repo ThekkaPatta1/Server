@@ -18,12 +18,14 @@ router.post('/work/post', upload.single('Wimage'),function (req, res) {
         const Tags = req.body.Tags;
         const PhoneNo = req.body.PhoneNo;
         const Workdescription = req.body.Workdescription;
+        const WorkTitle=req.body.WorkTitle;
 
             const data = new Work({
                 Username: Username,
                 Tags: Tags,
                 PhoneNo: PhoneNo,
                 Workdescription: Workdescription,
+                WorkTitle:WorkTitle,
                 Wimage:"/"+req.file.filename,
             });
             data.save()
@@ -67,6 +69,8 @@ router.get('/work/single/:id', function(req,res){
 })
 })
 
+
+
 // for delete
 router.delete('/work/delete/:id', auth.verifyUser, function (req, res) {
     //delete code
@@ -80,12 +84,9 @@ router.delete('/work/delete/:id', auth.verifyUser, function (req, res) {
 router.post('/work/update/:_id', function (req, res) {
     console.log(req.body)
     const _id = req.params._id;
-    const FullName = req.body.FullName;
-    const Address = req.body.Address;
-    const PhoneNo = req.body.PhoneNo;
-    const Username = req.body.Username;
-    const Password = req.body.Password;
-    Work.updateOne({ _id: _id }, { FullName:FullName, Address:Address,PhoneNo:PhoneNo,Username: Username,Password:Password })
+    const WorkTitle = req.body.WorkTitle;
+    const Workdescription = req.body.Workdescription;
+    Work.updateOne({ _id: _id }, {WorkTitle: WorkTitle,Workdescription:Workdescription })
     .then(function () {
         res.status(200).json({message : true})
     })
