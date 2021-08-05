@@ -11,6 +11,10 @@ const auth = require('../Middleware/Authenticate')
 
 // for showing all the works that a user has posted
 router.get('/works/posted/:un',(req,res)=>{
+    const dtnow = new Date().toLocaleString('en-US', {
+        timeZone: 'Asia/Kathmandu'
+      });
+    console.log(dtnow);
     Work.find({Username:req.params.un}).then(data=>{
         res.status(200).json({
             data 
@@ -35,42 +39,7 @@ router.post('/work/bidder/:id'), function (req, res) {
 
 }
 
-// router.get('/works/posted/:un', (req, res) => {
-//     console.log("running")
-//     Bid.aggregate([{
-//         $lookup: {
-//             from: 'Bid',
-//             localField: 'WUsername',
-//             foreignField: 'WUsername',
-//             as: 'Worker'
-//         }
-//     },
-//     {
-//         $unwind: '$Worker'
-//     },
-//     {
-
-//     },
-//     {
-//         $addfields: {
-//             "WUsername": '$Worker.WUsername'
-//         }
-//     },
-//     {
-//         $match: {
-//             $expr: {
-//                 $eq: [‘’, ‘123' ] } 
-//                 ]).then(data => {
-//                     res.status(200).json({
-//                         data
-//                     })
-//                 }).catch(err => {
-//                     res.status(400).json({ error: err })
-//                 })
-// })
-
 router.get('/works/bidder/:id',(req,res)=>{
-    console.log('hello mf')
     Bid.find({Wid:req.params.id}).then(data=>{
         res.status(200).json({data})
         console.log(data)
