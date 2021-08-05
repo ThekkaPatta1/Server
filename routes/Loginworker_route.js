@@ -110,6 +110,21 @@ router.get('/worker/single/:id', function(req,res){
 })
 })
 
+router.get('/worker/one/:un', function(req,res){
+    // console.log("this is for showing data")
+    // res.send("test show")
+    //console.log(req.body)
+    Worker.findOne({WUsername : req.params.un})
+    .then(function(data){
+    console.log(data);
+        res.status(200).json(data);
+})
+.catch(function(e){
+    res.status(500).json({error : e})
+})
+})
+
+
 // for delete
 router.delete('/worker/delete/:id', auth.verifyUser, function (req, res) {
     //delete code
