@@ -10,8 +10,7 @@ const date = require('date-and-time');
 
 
 router.post('/user/insert', upload.single('Uimage'), function async(req, res) {
-    
-
+    const errors = validationResult(req);
     // res.send(errors.array());
     if (errors.isEmpty) {
         //valid

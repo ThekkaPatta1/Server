@@ -9,21 +9,19 @@ const NotiUser = mongoose.model('NotiUser',{
         type: String,
         required: true
     },
-    Workid:{
-        type:String,
-        required:true
-    },
-    Wtitle:{
-        type:String,
-        required:true
-    },
-    Bidtime:{
-        type:Date,
-        required:true
-    },
     nType:{
         type:String,
         required:true
+    },
+    Workid:{
+        type:String,
+    },
+    Wtitle:{
+        type:String,
+    },
+    Bidtime:{
+        type:Date,
     }
+    
 })
 module.exports= NotiUser;
