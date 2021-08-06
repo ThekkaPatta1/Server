@@ -7,13 +7,11 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const upload = require('../Middleware/Upload');
 const auth = require('../Middleware/Authenticate')
-
+const date = require('date-and-time');
 
 // for showing all the works that a user has posted
 router.get('/works/posted/:un',(req,res)=>{
-    const dtnow = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Kathmandu'
-      });
+    const dtnow = new Date()
     console.log(dtnow);
     Work.find({Username:req.params.un}).then(data=>{
         res.status(200).json({

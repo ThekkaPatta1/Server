@@ -9,6 +9,9 @@ const NotiUser = mongoose.model('NotiUser',{
         type: String,
         required: true
     },
+    status:{
+        type:Boolean,
+    },
     nType:{
         type:String,
         required:true
@@ -22,6 +25,7 @@ const NotiUser = mongoose.model('NotiUser',{
     Bidtime:{
         type:Date,
     }
+
     
 })
 module.exports= NotiUser;

@@ -8,10 +8,8 @@ const upload = require('../Middleware/Upload');
 const date = require('date-and-time');
 
 //bidding work 
-router.post('/bid', upload.fields([]), function (req, res) {
-    const dtnow = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Kathmandu'
-    });
+router.post('/bid/post', upload.fields([]), function (req, res) {
+    const dtnow = new Date()
     console.log(dtnow);
     const errors = validationResult(req);
 
@@ -39,7 +37,10 @@ router.post('/bid', upload.fields([]), function (req, res) {
             nType: nType
         });
         data.save()
+        data2.save()
             .then(function (result) {
+                console.log(data)
+                console.log(data2)
                 res.status(201).json({ message: "Bidding Successful!!!!" })
             })// sucessess vayo ki vaena
 
