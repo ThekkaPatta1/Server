@@ -19,7 +19,7 @@ router.post('/user/insert', upload.single('Uimage'), function async (req, res) {
         const UPhoneNo = req.body.UPhoneNo;
         const UUsername = req.body.UUsername;
         const UPassword = req.body.UPassword;
-        const Uimage = req.file.path;
+        // const Uimage = req.file.path;
         
         // console.log(us);
         // console.log(add); 
@@ -30,7 +30,7 @@ router.post('/user/insert', upload.single('Uimage'), function async (req, res) {
                 UPhoneNo: UPhoneNo,
                 UUsername: UUsername,
                 UPassword: hash,
-                Uimage:"/" + req.file.filename,
+                // Uimage:"/" + req.file.filename,
                 
             });
             data.save()
