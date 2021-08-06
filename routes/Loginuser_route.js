@@ -5,12 +5,12 @@ const User = require('../models/user_model');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const upload = require('../Middleware/Upload');
-const auth = require('../Middleware/Authenticate')
+const auth = require('../Middleware/Authenticate');
+const date = require('date-and-time');
 
-router.post('/user/insert', upload.single('Uimage'), function async (req, res) {
-    console.log(req.body)
+
+router.post('/user/insert', upload.single('Uimage'), function async(req, res) {
     const errors = validationResult(req);
-
     // res.send(errors.array());
     if (errors.isEmpty) {
         //valid
@@ -19,8 +19,8 @@ router.post('/user/insert', upload.single('Uimage'), function async (req, res) {
         const UPhoneNo = req.body.UPhoneNo;
         const UUsername = req.body.UUsername;
         const UPassword = req.body.UPassword;
-        // const Uimage = req.file.path;
-        
+        const Uimage = req.file.path;
+
         // console.log(us);
         // console.log(add); 
         bcryptjs.hash(UPassword, 10, function (err, hash) {
@@ -30,8 +30,8 @@ router.post('/user/insert', upload.single('Uimage'), function async (req, res) {
                 UPhoneNo: UPhoneNo,
                 UUsername: UUsername,
                 UPassword: hash,
-                // Uimage:"/" + req.file.filename,
-                
+                Uimage: "/" + req.file.filename,
+
             });
             data.save()
                 .then(function (result) {
@@ -53,6 +53,7 @@ router.post('/user/insert', upload.single('Uimage'), function async (req, res) {
 
 //Login System .........................
 router.post('/user/login', function (req, res) {
+    console.log("logging in")
     const Username1 = req.body.UUsername;
     const Password1 = req.body.UPassword;
     console.log(Username1, Password1)
@@ -73,7 +74,7 @@ router.post('/user/login', function (req, res) {
                 // res.send(token)
                 return res.status(200).json({
                     // message: "Success !!",
-                    success:true,
+                    success: true,
                     token: token,
                     _id: userData1._id
                 })
@@ -95,17 +96,17 @@ router.get('/user/show', function (req, res) {
 })
 
 
-router.get('/user/single/:id', function(req,res){
+router.get('/user/single/:id', function (req, res) {
     // console.log("this is for showing data")
     // res.send("test show")
     //console.log(req.body)
-    User.findOne({_id : req.params.id})
-    .then(function(data){
-        res.status(200).json(data);
-})
-.catch(function(e){
-    res.status(500).json({error : e})
-})
+    User.findOne({ _id: req.params.id })
+        .then(function (data) {
+            res.status(200).json(data);
+        })
+        .catch(function (e) {
+            res.status(500).json({ error: e })
+        })
 })
 
 // for delete
@@ -119,7 +120,6 @@ router.delete('/user/delete/:id', auth.verifyUser, function (req, res) {
 })
 // for update
 router.post('/user/update/:_id', function (req, res) {
-    console.log(req.body)
     const _id = req.params._id;
     const UFullName = req.body.UFullName;
     const UAddress = req.body.UAddress;
