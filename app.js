@@ -26,7 +26,10 @@ const io = require("socket.io")(server,{
 });
 
 io.on("connection", (socket)=>{
-    console.log(socket.id)
+    socket.on('notification', (notid)=>{
+        console.log(notid)
+        socket.join(notid)
+    })
 })
 
 app.use(express.static("./Images"));
