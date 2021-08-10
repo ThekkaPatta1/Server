@@ -23,6 +23,12 @@ const Work = mongoose.model('Work',{
     },
     Wimage:{
         type: String
+    },
+    status:{
+        type:String
+    },
+    Worker:{
+        type:String
     }
 })
 module.exports = Work;
