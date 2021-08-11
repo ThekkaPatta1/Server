@@ -7,13 +7,11 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const upload = require('../Middleware/Upload');
 const auth = require('../Middleware/Authenticate')
-
+const date = require('date-and-time');
 
 // for showing all the works that a user has posted
 router.get('/works/posted/:un',(req,res)=>{
-    const dtnow = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Kathmandu'
-      });
+    const dtnow = new Date()
     console.log(dtnow);
     Work.find({Username:req.params.un}).then(data=>{
         res.status(200).json({
@@ -24,6 +22,17 @@ router.get('/works/posted/:un',(req,res)=>{
     })
 })
 
+router.get('/work/single:id',(req,res)=>{
+    const dtnow = new Date()
+    console.log(dtnow);
+    Work.find({_id:req.params.id}).then(data=>{
+        res.status(200).json({
+            data 
+        })
+    }).catch(err=>{
+        res.status(400).json({error:err})
+    })
+})
 
 
 
@@ -47,5 +56,18 @@ router.get('/works/bidder/:id',(req,res)=>{
         res.status(400).json({error:err})
     })
 })
+
+
+router.post('/worker/hire/:id'), function (req, res) {
+
+    Work.updateOne({ Wid: req.body.Wid })
+        .then(function (data) {
+            res.status(200).json(data);
+        })
+        .catch(function (e) {
+            res.status(500).json({ error: e })
+        })
+
+}
 
 module.exports = router;

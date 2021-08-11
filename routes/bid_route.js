@@ -9,9 +9,7 @@ const date = require('date-and-time');
 const { Socket } = require("../socket/config")
 //bidding work 
 router.post('/bid/post', upload.fields([]), function (req, res) {
-    const dtnow = new Date().toLocaleString('en-US', {
-        timeZone: 'Asia/Kathmandu'
-    });
+    const dtnow = new Date()
     console.log(dtnow);
     const errors = validationResult(req);
 
@@ -38,12 +36,11 @@ router.post('/bid/post', upload.fields([]), function (req, res) {
             Bidtime: dtnow,
             nType: nType
         });
-        data.save();
-        
+        data.save()
         data2.save()
             .then(function (result) {
-                console.log("Bid", result)
-                Socket.emit( "test", "Bid was done by worker " + data.WUsername);
+                console.log(data)
+                console.log(data2)
                 res.status(201).json({ message: "Bidding Successful!!!!" })
             })// sucessess vayo ki vaena
 
