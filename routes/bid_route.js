@@ -6,9 +6,9 @@ const NotiUser = require('../models/NotificationUser')
 const router = express.Router();
 const upload = require('../Middleware/Upload');
 const date = require('date-and-time');
-
+const { Socket } = require("../socket/config")
 //bidding work 
-router.post('/bid', upload.fields([]), function (req, res) {
+router.post('/bid/post', upload.fields([]), function (req, res) {
     const dtnow = new Date().toLocaleString('en-US', {
         timeZone: 'Asia/Kathmandu'
     });
@@ -38,12 +38,17 @@ router.post('/bid', upload.fields([]), function (req, res) {
             Bidtime: dtnow,
             nType: nType
         });
-        data.save()
+        data.save();
+        
+        data2.save()
             .then(function (result) {
+                console.log("Bid", result)
+                Socket.emit( "test", "Bid was done by worker " + data.WUsername);
                 res.status(201).json({ message: "Bidding Successful!!!!" })
             })// sucessess vayo ki vaena
 
             .catch(function (err45) {
+                console.log(err45)
                 res.status(500).json({ error: err45 })
             })// error aayo ki aayena
     }
