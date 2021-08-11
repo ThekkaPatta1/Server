@@ -13,13 +13,22 @@ const Work = mongoose.model('Work',{
         type : String,
         required: true
     },
+    WorkTitle:{
+        type:String,
+        required: true
+    },
     Workdescription:{
         type : String,
         required:true
     },
     Wimage:{
         type: String
+    },
+    status:{
+        type:String
+    },
+    Worker:{
+        type:String
     }
-
 })
 module.exports = Work;

@@ -31,7 +31,7 @@ router.post('/worker/insert',  upload.single('Wimage'), function (req, res) {
                 WSkills: WSkills,
                 WUsername: WUsername,
                 WPassword: hash,                
-                Wimage:"/" + req.file.filename,
+                Wimage:"/"+ req.file.filename,
                 // Certifyimage:"/"+req.file.filename
                 
             })
@@ -110,6 +110,17 @@ router.get('/worker/single/:id', function(req,res){
 })
 })
 
+router.get('/worker/username/:WUsername', function(req,res){
+    Worker.findOne({WUsername : req.params.WUsername})
+    .then(function(data){
+    console.log(data);
+        res.status(200).json(data);
+})
+.catch(function(e){
+    res.status(500).json({error : e})
+})
+})
+
 // for delete
 router.delete('/worker/delete/:id', auth.verifyUser, function (req, res) {
     //delete code
@@ -123,12 +134,13 @@ router.delete('/worker/delete/:id', auth.verifyUser, function (req, res) {
 router.post('/worker/update/:_id', function (req, res) {
     console.log(req.body)
     const _id = req.params._id;
-    const FullName = req.body.FullName;
-    const Address = req.body.Address;
-    const PhoneNo = req.body.PhoneNo;
-    const Username = req.body.Username;
-    const Password = req.body.Password;
-    Worker.updateOne({ _id: _id }, { FullName:FullName, Address:Address,PhoneNo:PhoneNo,Username: Username,Password:Password })
+    const WFullName = req.body.WFullName;
+    const WAddress = req.body.WAddress;
+    const WPhoneNo = req.body.WPhoneNo;
+    const WSkills = req.body.WSkills;
+    const WUsername = req.body.WUsername;
+    const WPassword = req.body.WPassword;
+    Worker.updateOne({ _id: _id }, { WFullName:WFullName, WAddress:WAddress,WSkills:WSkills,WPhoneNo:WPhoneNo,WUsername: WUsername,WPassword:WPassword })
     .then(function () {
         res.status(200).json({message : true})
     })
