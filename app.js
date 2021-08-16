@@ -17,6 +17,7 @@ const notiuser_route = require("./routes/Notification_route");
 const app = express();
 connectDB();
 
+
 app.use(express.static("./Images"));
 app.use(express.json());
 app.use('/Images', express.static(__dirname + "/Images"))
@@ -33,5 +34,25 @@ app.use(Rate_route);
 app.use(work_route);
 app.use(notiuser_route);
 
-app.listen(550);
+
+
+//Socket
+const server = require('http').createServer(app);
+
+const io = require('socket.io')(server,{
+  cors:{
+    origin: "*"
+  }
+});
+io.on('conection',(socket)=>{
+  console.log(haha)
+
+  socket.on("connect",(notuser)=>{
+console.log("notuser")
+  })
+})
+
+
+
+server.listen(550);
 // app.listen(process.env.PORT);   
