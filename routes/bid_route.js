@@ -61,6 +61,28 @@ router.get('/worker/bidder/:id', (req, res) => {
         res.status(400).json({ error: err })
     })
 })
+            const data = new Bid({
+                UUsername:UUsername,
+                WUsername: WUsername,
+                Wid: Wid,
+                Bidprice: Bidprice,
+                Worktime: Worktime,
+            });
+            const data2=new NotiUser({
+                UUsername:UUsername,
+                WUsername: WUsername,
+                Wtitle: Wid,
+                Bidtime:dtnow,
+                nType:nType
+            });
+            data.save()
+                .then(function (result) {
+                    res.status(201).json({ message: "Bidding Successful!!!!" })
+                })// sucessess vayo ki vaena
+                
+                .catch(function (err45) {
+                    res.status(500).json({ error: err45 })
+                })// error aayo ki aayena
 
 
 // for showing all the works who has bid on a work

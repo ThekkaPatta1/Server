@@ -1,4 +1,4 @@
-const express = require('express');
+    const express = require('express');
 const { check, validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
 const User = require('../models/user_model');
@@ -110,29 +110,33 @@ router.get('/user/single/:id', function (req, res) {
 })
 
 // for delete
-router.delete('/user/delete/:id', auth.verifyUser, function (req, res) {
+router.delete('/user/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
-    User.deleteOne({ _id: id }).then(function () {
-        res.send("Deleted !")
-    })
+    User.deleteOne({ _id: id })
+        .then((res)=> {
+            res.status(200).json({message:"deleted"})
+        })
+        .catch((e)=>{
+            res.status(500).json({error:e})
+        })
 
 })
 // for update
 router.post('/user/update/:_id', function (req, res) {
     const _id = req.params._id;
-    const UFullName = req.body.UFullName;
-    const UAddress = req.body.UAddress;
-    const UPhoneNo = req.body.UPhoneNo;
-    const UUsername = req.body.UUsername;
-    const UPassword = req.body.UPassword;
-    User.updateOne({ _id: _id }, { UFullName:UFullName, UAddress:UAddress,UPhoneNo:UPhoneNo,UUsername: UUsername,UPassword:UPassword })
-    .then(function () {
-        res.status(200).json({message : true})
-    })
-    .catch(function(err){
-        console.log(err)
-    })
+    const FullName = req.body.FullName;
+    const Address = req.body.Address;
+    const PhoneNo = req.body.PhoneNo;
+    const Username = req.body.Username;
+    const Password = req.body.Password;
+    User.updateOne({ _id: _id }, { FullName: FullName, Address: Address, PhoneNo: PhoneNo, Username: Username, Password: Password })
+        .then(function () {
+            res.status(200).json({ message: true })
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
 })
 
 module.exports = router;

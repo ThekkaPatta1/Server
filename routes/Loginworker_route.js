@@ -110,8 +110,11 @@ router.get('/worker/single/:id', function(req,res){
 })
 })
 
-router.get('/worker/username/:WUsername', function(req,res){
-    Worker.findOne({WUsername : req.params.WUsername})
+router.get('/worker/one/:un', function(req,res){
+    // console.log("this is for showing data")
+    // res.send("test show")
+    //console.log(req.body)
+    Worker.findOne({WUsername : req.params.un})
     .then(function(data){
     console.log(data);
         res.status(200).json(data);
@@ -121,12 +124,17 @@ router.get('/worker/username/:WUsername', function(req,res){
 }) 
 })
 
+
 // for delete
-router.delete('/worker/delete/:id', auth.verifyUser, function (req, res) {
+router.delete('/worker/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
-    Worker.deleteOne({ _id: id }).then(function () {
-        res.send("Deleted !")
+    Worker.deleteOne({ _id: id })
+    .then((res)=> {
+        res.status(200).json({message:"deleted"})
+    })
+    .catch((e)=>{
+        res.status(500).json({error:e})
     })
 
 })

@@ -15,7 +15,7 @@ const Bid = mongoose.model('Bid',{
     },
     Bidprice:{
         type:Number,
-        required:true
+        required:true 
     },
     Worktime:{
         type:Number,
