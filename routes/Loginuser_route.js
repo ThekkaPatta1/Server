@@ -76,7 +76,9 @@ router.post('/user/login', function (req, res) {
                     // message: "Success !!",
                     success: true,
                     token: token,
-                    _id: userData1._id
+                    _id: userData1._id,
+                    UUsername: userData1.UUsername
+
                 })
             })
         })
