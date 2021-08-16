@@ -65,7 +65,7 @@ router.get('/worker/bidder/:id', (req, res) => {
 
 // for showing all the works who has bid on a work
 router.post('/work/bidder/:id'), function (req, res) {
-    Bid.find({ Wid: req.body.Wid })
+    Bid.find({ Wid: req.body.id })
         .then(function (data) {
             res.status(200).json(data);
         })
@@ -74,7 +74,17 @@ router.post('/work/bidder/:id'), function (req, res) {
         })
 
 }
+//for showing work for a user where the worker has already bidded
+router.post('/bidded/works'), function (req, res) {
+    Bid.find({ Wid: req.body.id },{WUsername:req.body.Username})
+        .then(function (data) {
+            res.status(200).json(data);
+        })
+        .catch(function (e) {
+            res.status(500).json({ error: e })
+        })
 
+}
 
 //for showing all the works who has bid on a work
 router.get('/works/bidder/:id', (req, res) => {
