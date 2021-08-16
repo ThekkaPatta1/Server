@@ -5,6 +5,10 @@ const Bid = mongoose.model('Bid',{
         type: String,
         required: true
     },
+    WUsername:{
+        type:String,
+        required:true
+    },
     Wid:{
         type:String,
         required:true

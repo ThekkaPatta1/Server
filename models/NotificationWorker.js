@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'); //third party
 
-const NotiUser = mongoose.model('NotiUser',{
+const NotiWorker = mongoose.model('NotiWorker',{
     UUsername:{
         type: String,
         required: true
@@ -18,14 +18,13 @@ const NotiUser = mongoose.model('NotiUser',{
     },
     Workid:{
         type:String,
+        required:true
     },
     Wtitle:{
         type:String,
     },
-    Bidtime:{
+    Hiretime:{
         type:Date,
     }
-
-
 })
-module.exports= NotiUser;
+module.exports= NotiWorker;

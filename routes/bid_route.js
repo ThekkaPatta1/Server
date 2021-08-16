@@ -50,8 +50,33 @@ router.post('/bid/post', upload.fields([]), function (req, res) {
     }
 })
 
+
+// for showing worker who has bid on a work
 router.get('/worker/bidder/:id', (req, res) => {
-    console.log('hello mf')
+    Bid.find({ Wid: req.params.id }).then(data => {
+        res.status(200).json({ data })
+        console.log(data)
+    }).catch(err => {
+        res.status(400).json({ error: err })
+    })
+})
+
+
+// for showing all the works who has bid on a work
+router.post('/work/bidder/:id'), function (req, res) {
+    Bid.find({ Wid: req.body.Wid })
+        .then(function (data) {
+            res.status(200).json(data);
+        })
+        .catch(function (e) {
+            res.status(500).json({ error: e })
+        })
+
+}
+
+
+//for showing all the works who has bid on a work
+router.get('/works/bidder/:id', (req, res) => {
     Bid.find({ Wid: req.params.id }).then(data => {
         res.status(200).json({ data })
         console.log(data)

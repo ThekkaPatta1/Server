@@ -19,6 +19,7 @@ router.post('/work/post', upload.single('Wimage'),function (req, res) {
         const PhoneNo = req.body.PhoneNo;
         const Workdescription = req.body.Workdescription;
         const WorkTitle=req.body.WorkTitle;
+        const status="Pending"
 
             const data = new Work({
                 Username: Username,
@@ -26,6 +27,7 @@ router.post('/work/post', upload.single('Wimage'),function (req, res) {
                 PhoneNo: PhoneNo,
                 Workdescription: Workdescription,
                 WorkTitle:WorkTitle,
+                status:status,
                 Wimage:"/"+req.file.filename,
             });
             data.save()
@@ -94,4 +96,8 @@ router.post('/work/update/:_id', function (req, res) {
         console.log(err)
     })
 })
+
+
+
+
 module.exports = router;
