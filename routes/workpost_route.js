@@ -72,15 +72,20 @@ router.get('/work/single/:id', function(req,res){
 
 
 // for delete
-router.delete('/work/delete/:id', auth.verifyUser, function (req, res) {
+router.delete('/work/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
-    Work.deleteOne({ _id: id }).then(function () {
-        res.send("Deleted !")
+    Work.deleteOne({ _id: id })
+    .then((res)=> {
+        res.status(200).json({message:"deleted"})
+    })
+    .catch((e)=>{
+        res.status(500).json({error:e})
     })
 
 })
-// for update
+
+
 router.post('/work/update/:_id', function (req, res) {
     console.log(req.body)
     const _id = req.params._id;

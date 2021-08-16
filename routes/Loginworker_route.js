@@ -122,11 +122,15 @@ router.get('/worker/username/:WUsername', function(req,res){
 })
 
 // for delete
-router.delete('/worker/delete/:id', auth.verifyUser, function (req, res) {
+router.delete('/worker/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
-    Worker.deleteOne({ _id: id }).then(function () {
-        res.send("Deleted !")
+    Worker.deleteOne({ _id: id })
+    .then((res)=> {
+        res.status(200).json({message:"deleted"})
+    })
+    .catch((e)=>{
+        res.status(500).json({error:e})
     })
 
 })

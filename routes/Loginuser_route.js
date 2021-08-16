@@ -1,4 +1,4 @@
-const express = require('express');
+    const express = require('express');
 const { check, validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
 const User = require('../models/user_model');
@@ -109,12 +109,16 @@ router.get('/user/single/:id', function(req,res){
 })
 
 // for delete
-router.delete('/user/delete/:id', auth.verifyUser, function (req, res) {
+router.delete('/user/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
-    User.deleteOne({ _id: id }).then(function () {
-        res.send("Deleted !")
-    })
+    User.deleteOne({ _id: id })
+        .then((res)=> {
+            res.status(200).json({message:"deleted"})
+        })
+        .catch((e)=>{
+            res.status(500).json({error:e})
+        })
 
 })
 // for update
