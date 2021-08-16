@@ -1,7 +1,7 @@
 const mongoose = require('mongoose'); //third party
 
 const Bid = mongoose.model('Bid',{
-    WUsername:{
+    UUsername:{
         type: String,
         required: true
     },
