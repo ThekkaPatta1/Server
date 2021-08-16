@@ -118,7 +118,7 @@ router.get('/worker/username/:WUsername', function(req,res){
 })
 .catch(function(e){
     res.status(500).json({error : e})
-})
+}) 
 })
 
 // for delete

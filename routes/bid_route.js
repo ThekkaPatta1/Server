@@ -6,7 +6,7 @@ const NotiUser = require('../models/NotificationUser')
 const router = express.Router();
 const upload = require('../Middleware/Upload');
 const date = require('date-and-time');
-
+const { Socket } = require("../socket/config")
 //bidding work 
 router.post('/bid/post', upload.fields([]), function (req, res) {
     const dtnow = new Date()
@@ -45,6 +45,7 @@ router.post('/bid/post', upload.fields([]), function (req, res) {
             })// sucessess vayo ki vaena
 
             .catch(function (err45) {
+                console.log(err45)
                 res.status(500).json({ error: err45 })
             })// error aayo ki aayena
     }
