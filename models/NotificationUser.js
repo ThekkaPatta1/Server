@@ -26,6 +26,6 @@ const NotiUser = mongoose.model('NotiUser',{
         type:Date,
     }
 
-    
+
 })
 module.exports= NotiUser;

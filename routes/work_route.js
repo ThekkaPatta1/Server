@@ -9,65 +9,51 @@ const upload = require('../Middleware/Upload');
 const auth = require('../Middleware/Authenticate')
 const date = require('date-and-time');
 
+
 // for showing all the works that a user has posted
-router.get('/works/posted/:un',(req,res)=>{
+router.get('/works/posted/:un', (req, res) => {
     const dtnow = new Date()
     console.log(dtnow);
-    Work.find({Username:req.params.un}).then(data=>{
+    Work.find({ Username: req.params.un }).then(data => {
         res.status(200).json({
-            data 
+            data
         })
-    }).catch(err=>{
-        res.status(400).json({error:err})
+    }).catch(err => {
+        res.status(400).json({ error: err })
     })
 })
 
-router.get('/work/single:id',(req,res)=>{
+// for showing a single work
+router.get('/work/single:id', (req, res) => {
     const dtnow = new Date()
     console.log(dtnow);
-    Work.find({_id:req.params.id}).then(data=>{
+    Work.find({ _id: req.params.id }).then(data => {
         res.status(200).json({
-            data 
+            data
         })
-    }).catch(err=>{
-        res.status(400).json({error:err})
+    }).catch(err => {
+        res.status(400).json({ error: err })
     })
 })
 
 
 
-// for showing all the workers who has bid on a work
-router.post('/work/bidder/:id'), function (req, res) {
-    Bid.find({ Wid: req.body.Wid })
-        .then(function (data) {
-            res.status(200).json(data);
+
+
+//for updating a work table when a worker is hired
+router.post('/hire/worker', upload.fields([]), (req, res) => {
+    const WUsername = req.body.WUsername;
+    console.log(req.body.Wid)
+    Work.updateOne({ _id: req.body.Wid }, { status: "On-going", Worker: WUsername })
+        .then(function () {
+            res.status(200).json({ message: "Updated" })
+            console.log("message")
         })
         .catch(function (e) {
             res.status(500).json({ error: e })
         })
-
-}
-
-router.get('/works/bidder/:id',(req,res)=>{
-    Bid.find({Wid:req.params.id}).then(data=>{
-        res.status(200).json({data})
-        console.log(data)
-    }).catch(err=>{
-        res.status(400).json({error:err})
-    })
 })
 
 
-router.post('/worker/hire/:id'), function (req, res) {
-
-    Work.updateOne({ Wid: req.body.Wid })
-        .then(function (data) {
-            res.status(200).json(data);
-        })
-        .catch(function (e) {
-            res.status(500).json({ error: e })
-        })
-
-}
 
 module.exports = router;

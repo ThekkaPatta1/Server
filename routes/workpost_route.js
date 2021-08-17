@@ -19,6 +19,7 @@ router.post('/work/post', upload.single('Wimage'),function (req, res) {
         const PhoneNo = req.body.PhoneNo;
         const Workdescription = req.body.Workdescription;
         const WorkTitle=req.body.WorkTitle;
+        const status="Pending"
 
             const data = new Work({
                 Username: Username,
@@ -26,6 +27,7 @@ router.post('/work/post', upload.single('Wimage'),function (req, res) {
                 PhoneNo: PhoneNo,
                 Workdescription: Workdescription,
                 WorkTitle:WorkTitle,
+                status:status,
                 Wimage:"/"+req.file.filename,
             });
             data.save()
@@ -72,15 +74,20 @@ router.get('/work/single/:id', function(req,res){
 
 
 // for delete
-router.delete('/work/delete/:id', auth.verifyUser, function (req, res) {
+router.delete('/work/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
-    Work.deleteOne({ _id: id }).then(function () {
-        res.send("Deleted !")
+    Work.deleteOne({ _id: id })
+    .then((res)=> {
+        res.status(200).json({message:"deleted"})
+    })
+    .catch((e)=>{
+        res.status(500).json({error:e})
     })
 
 })
-// for update
+
+
 router.post('/work/update/:_id', function (req, res) {
     console.log(req.body)
     const _id = req.params._id;
@@ -94,4 +101,8 @@ router.post('/work/update/:_id', function (req, res) {
         console.log(err)
     })
 })
+
+
+
+
 module.exports = router;
