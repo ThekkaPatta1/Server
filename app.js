@@ -13,6 +13,7 @@ const bid_route= require('./routes/bid_route');
 const Admin_route =require("./routes/Admin_route");
 const Rate_route = require("./routes/Rate_route");
 const work_route =  require('./routes/work_route');
+const FavWorker_route =  require('./routes/FavWorker_route');
 const notiuser_route = require("./routes/Notification_route");
 const app = express();
 connectDB();
@@ -35,6 +36,7 @@ app.use(Admin_route);
 app.use(Rate_route);
 app.use(work_route);
 app.use(notiuser_route);
+app.use(FavWorker_route);
 
 
 // const server = http.createServer(app);
