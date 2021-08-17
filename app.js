@@ -18,8 +18,6 @@ const notiuser_route = require("./routes/Notification_route");
 const app = express();
 connectDB();
 
-
-
 // const eventEmitter =new Emitter()
 // app.set('eventEmitter',eventEmitter)
 
@@ -39,6 +37,7 @@ app.use(Rate_route);
 app.use(work_route);
 app.use(notiuser_route);
 app.use(FavWorker_route);
+
 
 // const server = http.createServer(app);
 // const { io } = require("./socket/config");
@@ -80,4 +79,3 @@ app.use(FavWorker_route);
 // io.attach(app);
 
 app.listen(550);
-// app.listen(process.env.PORT);   
