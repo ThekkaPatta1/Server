@@ -4,6 +4,7 @@ const bodyParser = require('body-parser') //core module
 const cors = require('cors');
 
 const connectDB  = require('./database/db');
+// const http = require('http')
 
 const Loginuser_route = require('./routes/Loginuser_route');
 const Loginworker_route = require('./routes/Loginworker_route');
@@ -12,12 +13,13 @@ const bid_route= require('./routes/bid_route');
 const Admin_route =require("./routes/Admin_route");
 const Rate_route = require("./routes/Rate_route");
 const work_route =  require('./routes/work_route');
+const FavWorker_route =  require('./routes/FavWorker_route');
 const notiuser_route = require("./routes/Notification_route");
 const app = express();
 connectDB();
 
-
-
+// const eventEmitter =new Emitter()
+// app.set('eventEmitter',eventEmitter)
 
 app.use(express.static("./Images"));
 app.use(express.json());
@@ -33,11 +35,10 @@ app.use(Admin_route);
 app.use(Rate_route);
 app.use(work_route);
 app.use(notiuser_route);
+app.use(FavWorker_route);
 
-<<<<<<< HEAD
 
-// app.listen(550);
 app.listen(process.env.PORT);   
-=======
 app.listen(550); 
->>>>>>> workhistory
+
+

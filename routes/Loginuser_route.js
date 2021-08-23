@@ -1,4 +1,4 @@
-    const express = require('express');
+const express = require('express');
 const { check, validationResult } = require('express-validator');
 const bcryptjs = require('bcryptjs');
 const User = require('../models/user_model');
@@ -76,7 +76,9 @@ router.post('/user/login', function (req, res) {
                     // message: "Success !!",
                     success: true,
                     token: token,
-                    _id: userData1._id
+                    _id: userData1._id,
+                    UUsername: userData1.UUsername
+
                 })
             })
         })
