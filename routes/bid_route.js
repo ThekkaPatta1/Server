@@ -6,7 +6,6 @@ const NotiUser = require('../models/NotificationUser')
 const router = express.Router();
 const upload = require('../Middleware/Upload');
 const date = require('date-and-time');
-const { Socket } = require("../socket/config")
 //bidding work 
 router.post('/bid/post', upload.fields([]), function (req, res) {
     const dtnow = new Date()
@@ -53,36 +52,36 @@ router.post('/bid/post', upload.fields([]), function (req, res) {
 
 
 // for showing worker who has bid on a work
-router.get('/worker/bidder/:id', (req, res) => {
-    Bid.find({ Wid: req.params.id }).then(data => {
-        res.status(200).json({ data })
-        console.log(data)
-    }).catch(err => {
-        res.status(400).json({ error: err })
-    })
-})
-            const data = new Bid({
-                UUsername:UUsername,
-                WUsername: WUsername,
-                Wid: Wid,
-                Bidprice: Bidprice,
-                Worktime: Worktime,
-            });
-            const data2=new NotiUser({
-                UUsername:UUsername,
-                WUsername: WUsername,
-                Wtitle: Wid,
-                Bidtime:dtnow,
-                nType:nType
-            });
-            data.save()
-                .then(function (result) {
-                    res.status(201).json({ message: "Bidding Successful!!!!" })
-                })// sucessess vayo ki vaena
+// router.get('/worker/bidder/:id', (req, res) => {
+//     Bid.find({ Wid: req.params.id }).then(data => {
+//         res.status(200).json({ data })
+//         console.log(data)
+//     }).catch(err => {
+//         res.status(400).json({ error: err })
+//     })
+// })
+//             const data = new Bid({
+//                 UUsername:UUsername,
+//                 WUsername: WUsername,
+//                 Wid: Wid,
+//                 Bidprice: Bidprice,
+//                 Worktime: Worktime,
+//             });
+//             const data2=new NotiUser({
+//                 UUsername:UUsername,
+//                 WUsername: WUsername,
+//                 Wtitle: Wid,
+//                 Bidtime:dtnow,
+//                 nType:nType
+//             });
+//             data.save()
+//                 .then(function (result) {
+//                     res.status(201).json({ message: "Bidding Successful!!!!" })
+//                 })// sucessess vayo ki vaena
                 
-                .catch(function (err45) {
-                    res.status(500).json({ error: err45 })
-                })// error aayo ki aayena
+//                 .catch(function (err45) {
+//                     res.status(500).json({ error: err45 })
+//                 })// error aayo ki aayena
 
 
 // for showing all the works who has bid on a work
