@@ -1,9 +1,13 @@
 const mongoose = require('mongoose'); //third party
 
 const Bid = mongoose.model('Bid',{
-    WUsername:{
+    UUsername:{
         type: String,
         required: true
+    },
+    WUsername:{
+        type:String,
+        required:true
     },
     Wid:{
         type:String,
@@ -11,7 +15,7 @@ const Bid = mongoose.model('Bid',{
     },
     Bidprice:{
         type:Number,
-        required:true
+        required:true 
     },
     Worktime:{
         type:Number,

@@ -5,7 +5,6 @@ const cors = require('cors');
 
 const connectDB  = require('./database/db');
 
-
 const Loginuser_route = require('./routes/Loginuser_route');
 const Loginworker_route = require('./routes/Loginworker_route');
 const workpost_route = require('./routes/workpost_route');
@@ -13,8 +12,12 @@ const bid_route= require('./routes/bid_route');
 const Admin_route =require("./routes/Admin_route");
 const Rate_route = require("./routes/Rate_route");
 const work_route =  require('./routes/work_route');
+const notiuser_route = require("./routes/Notification_route");
 const app = express();
 connectDB();
+
+
+
 
 app.use(express.static("./Images"));
 app.use(express.json());
@@ -29,7 +32,12 @@ app.use(bid_route);
 app.use(Admin_route);
 app.use(Rate_route);
 app.use(work_route);
+app.use(notiuser_route);
 
+<<<<<<< HEAD
 
 // app.listen(550);
 app.listen(process.env.PORT);   
+=======
+app.listen(550); 
+>>>>>>> workhistory
