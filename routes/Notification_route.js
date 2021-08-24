@@ -15,7 +15,7 @@ router.get('/notifications/user/:un',(req,res)=>{
     })
 })
 router.get('/notifications/worker/:un',(req,res)=>{
-    NotiWorker.find({WUsername:req.params.un})
+    NotiWorker.find({WUsername:req.params.un}).sort({"Ratetime":-1})
     .then(data=>{
         res.status(200).json({data})
     }).catch(err=>{
@@ -35,12 +35,14 @@ router.post('/post/notification', upload.fields([]), function (req, res) {
         const WUsername = req.body.WUsername;
         const Wid = req.body.Workid;
         const nType = req.body.nType;
+        const Ratenum = req.body.Ratenum;
 
         const data = new NotiWorker({
             UUsername: UUsername,
             WUsername: WUsername,
             Workid: Wid,
-            nType:nType
+            nType:nType,
+            Ratenum:Ratenum
         })
         data.save()
             .then(function (result) {

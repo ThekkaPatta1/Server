@@ -97,16 +97,24 @@ router.get('/worker/show', function (req, res) {
 
 
 router.get('/worker/single/:id', function(req,res){
-    // console.log("this is for showing data")
-    // res.send("test show")
-    //console.log(req.body)
-    Worker.findOne({_id : req.params.id})
+      Worker.findOne({_id : req.params.id})
     .then(function(data){
     console.log(data);
         res.status(200).json(data);
 })
 .catch(function(e){
     res.status(500).json({error : e})
+})
+})
+
+router.get('/worker/username/:un', function(req,res){
+    Worker.findOne({WUsername : req.params.un})
+  .then(function(data){
+  console.log(data);
+      res.status(200).json(data);
+})
+.catch(function(e){
+  res.status(500).json({error : e})
 })
 })
 
