@@ -26,8 +26,7 @@ app.use(express.json());
 app.use('/Images', express.static(__dirname + "/Images"))
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}))
-
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(Loginuser_route);
 app.use(Loginworker_route);
 app.use(workpost_route);
@@ -39,43 +38,7 @@ app.use(notiuser_route);
 app.use(FavWorker_route);
 
 
-// const server = http.createServer(app);
-// const { io } = require("./socket/config");
+app.listen(process.env.PORT);   
+app.listen(550); 
 
-// const server = http.createServer(app);
 
-// const socketIo = require("socket.io");
-// const io = socketIo(server);
-
-// let interval;
-
-// io.on("connection", (socket) => {
-//   console.log("New client connected");
-//   if (interval) {
-//     clearInterval(interval);
-//   }
-//   interval = setInterval(() => getApiAndEmit(socket), 1000);
-//   socket.on("disconnect", () => {
-//     console.log("Client disconnected");
-//     clearInterval(interval);
-//   });
-// });
-// io.on("connection", (socket) => {
-//     console.log("New client connected");
-//     if (interval) {
-//       clearInterval(interval);
-//     }
-//     interval = setInterval(() => getApiAndEmit(socket), 1000);
-//     socket.on("disconnect", () => {
-//       console.log("Client disconnected");
-//       clearInterval(interval);
-//     });
-//   });
-// const getApiAndEmit = socket => {
-// const response = new Date();
-//     // Emitting a new message. Will be consumed by the client
-//     socket.emit("FromAPI", response);
-//   };
-// io.attach(app);
-
-app.listen(550);

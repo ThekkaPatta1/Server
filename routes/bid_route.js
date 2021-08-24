@@ -6,7 +6,6 @@ const NotiUser = require('../models/NotificationUser')
 const router = express.Router();
 const upload = require('../Middleware/Upload');
 const date = require('date-and-time');
-
 //bidding work 
 router.post('/bid/post', upload.fields([]), function (req, res) {
     const dtnow = new Date()

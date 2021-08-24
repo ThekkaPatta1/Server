@@ -55,5 +55,14 @@ router.post('/hire/worker', upload.fields([]), (req, res) => {
 })
 
 
+router.get('/workhistory/:WUsername', (req, res) => {
+    Work.find({Worker : req.params.WUsername }).then(data => {
+        res.status(200).json({data})
+    }).catch(err => {
+        res.status(400).json({ error: err })
+    })
+})
+
+
 
 module.exports = router;
