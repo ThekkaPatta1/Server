@@ -12,14 +12,14 @@ const date = require('date-and-time');
 
 // for showing all the works that a user has posted
 router.get('/works/posted/:un', (req, res) => {
-    const dtnow = new Date()
-    console.log(dtnow);
+    // const dtnow = new Date()
+    // console.log(dtnow);
     Work.find({ Username: req.params.un }).then(data => {
-        res.status(200).json({
+        return res.status(200).json({
             data
         })
     }).catch(err => {
-        res.status(400).json({ error: err })
+        return res.status(400).json({ error: err })
     })
 })
 
@@ -52,6 +52,13 @@ router.post('/hire/worker', upload.fields([]), (req, res) => {
         .catch(function (e) {
             res.status(500).json({ error: e })
         })
+})
+
+router.post('/complete/work/id', upload.fields([]), (req, res) => {
+    Work.updateOne({ _id: req.body.id }, { status: "Completed"})
+    .then(function(){
+        res.status(200).json({message:'Work completed'})
+    })
 })
 
 
