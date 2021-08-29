@@ -21,7 +21,7 @@ const Register = mongoose.model('Register',{
         type : String,
         required:true
     },
-    Uimage:{
+    ProfileImg:{
         type: String
     },
     Citzimage:{

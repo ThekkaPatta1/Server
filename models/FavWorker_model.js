@@ -25,7 +25,7 @@ const FavWorker = mongoose.model('FavWorker',{
         type: String
     },
  
-    Wimage:{
+    ProfileImg:{
         type: String
     }
     

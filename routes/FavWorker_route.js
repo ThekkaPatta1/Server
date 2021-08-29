@@ -6,7 +6,7 @@ const upload = require('../Middleware/Upload');
 
 const auth = require('../Middleware/Authenticate');
 
-router.post('/favworker/insert', upload.single('Wimage'), function async(req, res) {
+router.post('/favworker/insert', upload.single('ProfileImg'), function async(req, res) {
     console.log(req.body)
     const errors = validationResult(req);
    if (errors.isEmpty) {
@@ -17,7 +17,7 @@ router.post('/favworker/insert', upload.single('Wimage'), function async(req, re
         const WSkills = req.body.WSkills;
         const WUsername = req.body.WUsername;
         const UUsername = req.body.UUsername;
-        const Wimage = req.body.Wimage;
+        const ProfileImg = req.body.ProfileImg;
        
         
 
@@ -28,7 +28,7 @@ router.post('/favworker/insert', upload.single('Wimage'), function async(req, re
             WSkills: WSkills,
             WUsername: WUsername,
             UUsername: UUsername,
-            Wimage: "/" + Wimage
+            ProfileImg: "/" + ProfileImg
             
         })
         

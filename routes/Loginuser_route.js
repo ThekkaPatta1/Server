@@ -9,7 +9,7 @@ const auth = require('../Middleware/Authenticate');
 const date = require('date-and-time');
 
 
-router.post('/user/insert', upload.single('Uimage'), function async(req, res) {
+router.post('/user/insert', upload.single('ProfileImg'), function async(req, res) {
     const errors = validationResult(req);
     // res.send(errors.array());
     if (errors.isEmpty) {
@@ -19,7 +19,7 @@ router.post('/user/insert', upload.single('Uimage'), function async(req, res) {
         const UPhoneNo = req.body.UPhoneNo;
         const UUsername = req.body.UUsername;
         const UPassword = req.body.UPassword;
-        const Uimage = req.file.path;
+        const ProfileImg = req.file.path;
 
         // console.log(us);
         // console.log(add); 
@@ -30,7 +30,7 @@ router.post('/user/insert', upload.single('Uimage'), function async(req, res) {
                 UPhoneNo: UPhoneNo,
                 UUsername: UUsername,
                 UPassword: hash,
-                Uimage: "/" + req.file.filename,
+                ProfileImg: "/" + req.file.filename,
 
             });
             data.save()
