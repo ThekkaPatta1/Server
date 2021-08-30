@@ -21,7 +21,7 @@ const Work = mongoose.model('Work',{
         type : String,
         required:true
     },
-    Wimage:{
+    ProfileImg:{
         type: String
     },
     status:{

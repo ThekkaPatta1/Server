@@ -21,7 +21,7 @@ const User = mongoose.model('User',{
         type : String,
         required:true
     },
-    Uimage:{
+    ProfileImg:{
         type: String,
     }
 })

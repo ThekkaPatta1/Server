@@ -7,7 +7,7 @@ const router = express.Router();
 const upload = require('../Middleware/Upload');
 const auth = require('../Middleware/Authenticate')
 
-router.post('/worker/insert',  upload.single('Wimage'), function (req, res) {
+router.post('/worker/insert', upload.single('ProfileImg'), function (req, res) {
     console.log(req.body)
     const errors = validationResult(req);
 
@@ -20,9 +20,9 @@ router.post('/worker/insert',  upload.single('Wimage'), function (req, res) {
         const WSkills = req.body.WSkills;
         const WUsername = req.body.WUsername;
         const WPassword = req.body.WPassword;
-        const Wimage = req.file.path;
+        const ProfileImg = req.file.path;
         // const Certifyimage = req.file.path;
-   
+
         bcryptjs.hash(WPassword, 10, function (err, hash) {
             const data = new Worker({
                 WFullName: WFullName,
@@ -30,10 +30,10 @@ router.post('/worker/insert',  upload.single('Wimage'), function (req, res) {
                 WPhoneNo: WPhoneNo,
                 WSkills: WSkills,
                 WUsername: WUsername,
-                WPassword: hash,                
-                Wimage:"/"+ req.file.filename,
+                WPassword: hash,
+                ProfileImg: "/" + req.file.filename,
                 // Certifyimage:"/"+req.file.filename
-                
+
             })
             data.save()
                 .then(function (result) {
@@ -75,7 +75,7 @@ router.post('/worker/login', function (req, res) {
                 // res.send(token)
                 return res.status(200).json({
                     // message: "Success !!",
-                    success:true,
+                    success: true,
                     token: token,
                     _id: userData1._id
                 })
@@ -96,32 +96,27 @@ router.get('/worker/show', function (req, res) {
 })
 
 
-router.get('/worker/single/:id', function(req,res){
-    // console.log("this is for showing data")
-    // res.send("test show")
-    //console.log(req.body)
-    Worker.findOne({_id : req.params.id})
-    .then(function(data){
-    console.log(data);
-        res.status(200).json(data);
-})
-.catch(function(e){
-    res.status(500).json({error : e})
-})
+router.get('/worker/single/:id', function (req, res) {
+
+    Worker.findOne({ _id: req.params.id })
+        .then(function (data) {
+            console.log(data);
+            res.status(200).json(data);
+        })
+        .catch(function (e) {
+            res.status(500).json({ error: e })
+        })
 })
 
-router.get('/worker/one/:un', function(req,res){
-    // console.log("this is for showing data")
-    // res.send("test show")
-    //console.log(req.body)
-    Worker.findOne({WUsername : req.params.un})
-    .then(function(data){
-    console.log(data);
-        res.status(200).json(data);
-})
-.catch(function(e){
-    res.status(500).json({error : e})
-}) 
+router.get('/worker/one/:un', function (req, res) {
+    Worker.findOne({ WUsername: req.params.un })
+        .then(function (data) {
+            console.log(data);
+            res.status(200).json(data);
+        })
+        .catch(function (e) {
+            res.status(500).json({ error: e })
+        })
 })
 
 
@@ -130,12 +125,12 @@ router.delete('/worker/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
     Worker.deleteOne({ _id: id })
-    .then((res)=> {
-        res.status(200).json({message:"deleted"})
-    })
-    .catch((e)=>{
-        res.status(500).json({error:e})
-    })
+        .then((res) => {
+            res.status(200).json({ message: "deleted" })
+        })
+        .catch((e) => {
+            res.status(500).json({ error: e })
+        })
 
 })
 // for update
@@ -148,13 +143,14 @@ router.post('/worker/update/:_id', function (req, res) {
     const WSkills = req.body.WSkills;
     const WUsername = req.body.WUsername;
     const WPassword = req.body.WPassword;
-    Worker.updateOne({ _id: _id }, { WFullName:WFullName, WAddress:WAddress,WSkills:WSkills,WPhoneNo:WPhoneNo,WUsername: WUsername,WPassword:WPassword })
-    .then(function () {
-        res.status(200).json({message : true})
-    })
-    .catch(function(err){
-        console.log(err)
-    })
+    Worker.updateOne({ _id: _id }, { WFullName: WFullName, WAddress: WAddress, WSkills: WSkills, WPhoneNo: WPhoneNo, WUsername: WUsername, WPassword: WPassword })
+        .then(function () {
+            res.status(200).json({ message: true })
+        })
+        .catch(function (err) {
+            console.log(err)
+        })
 })
+
 
 module.exports = router;

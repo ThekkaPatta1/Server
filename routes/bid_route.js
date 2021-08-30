@@ -1,6 +1,5 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
-const bcryptjs = require('bcryptjs');
 const Bid = require('../models/bid_model');
 const NotiUser = require('../models/NotificationUser')
 const router = express.Router();
@@ -67,6 +66,7 @@ router.post('/work/bidder/:id'), function (req, res) {
     Bid.find({ Wid: req.body.Wid })
         .then(function (data) {
             res.status(200).json(data);
+
         })
         .catch(function (e) {
             res.status(500).json({ error: e })
