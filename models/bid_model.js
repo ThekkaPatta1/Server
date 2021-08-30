@@ -18,8 +18,7 @@ const Bid = mongoose.model('Bid',{
         required:true 
     },
     Worktime:{
-        type:Number,
-        required:true
+        type:Date,
     }
 })
 module.exports= Bid;
