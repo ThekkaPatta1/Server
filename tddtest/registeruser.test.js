@@ -1,5 +1,7 @@
 // use the path of your model
-const user = require('../models/user_model');
+const adduser = require('../models/user_model');
+const loguser = require('../models/user_model')
+
 // const worker = require('../models/worker_model')
 const mongoose = require('mongoose');
 // use the new name of the database
@@ -25,7 +27,7 @@ describe('Register Test', () => {
  'UPassword':'agraj'
  };
  
- return user.create(User)
+ return adduser.create(User)
  .then((pro_ret) => {
 expect(pro_ret.UFullName).toEqual('Agraj Poudel');
 expect(pro_ret.UAddress).toEqual('Baluwatar');
@@ -34,4 +36,15 @@ expect(pro_ret.UUsername).toEqual('agraj');
 expect(pro_ret.UPassword).toEqual('agraj');
  });
  });
+})
+
+//login user test
+
+it("User Login testing", async()=>{
+    const Worker ={
+        "WUsername":"agraj",
+        "WPassword":"agraj"
+    }
+    return loguser.findOne({Worker});
+
 })

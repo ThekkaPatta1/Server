@@ -22,6 +22,7 @@ describe('Adding post test', () => {
  'Tags': 'plumbing',
  'PhoneNo': '36541585',
  'Workdescription': 'I need to fix by shower head',
+ 'WorkTitle': 'Title'
  };
  
  return user.create(Worker)
