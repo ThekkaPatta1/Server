@@ -63,6 +63,11 @@ router.get('/workhistory/:WUsername', (req, res) => {
     })
 })
 
-
-
+router.get('/work/history/:UUsername', (req, res) => {
+    Work.find({Username : req.params.UUsername }).then(data => {
+        res.status(200).json({data})
+    }).catch(err => {
+        res.status(400).json({ error: err })
+    })
+})
 module.exports = router;

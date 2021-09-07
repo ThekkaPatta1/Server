@@ -72,7 +72,7 @@ router.post('/bidded/works'), function (req, res) {
 }
 
 //for showing all the works who has bid on a work
-router.get('/works/bidder/:id', (req, res) => {
+router.get('/works/bidder/:id', function(req, res)  {
     Bid.find({ Wid: req.params.id }).then(data => {
         res.status(200).json({ data })
         console.log(data)
@@ -81,4 +81,28 @@ router.get('/works/bidder/:id', (req, res) => {
     })
 })
 
+
+router.get('/worker/bidder/:wn', function(req, res) {
+    Bid.find({ WUsername: req.params.wn })
+    .then(function(data) {
+        console.log(data)
+        res.status(200).json( data)
+        
+    })
+    .catch(function(e) {
+        res.status(500).json({ error: e })
+    })
+})
+
+router.get('/user/bidder/:un', function(req, res) {
+    Bid.findOne({ UUsername: req.params.un })
+    .then(function(data) {
+        console.log(data)
+        res.status(200).json( data)
+        
+    })
+    .catch(function(e) {
+        res.status(500).json({ error: e })
+    })
+})
 module.exports = router;
