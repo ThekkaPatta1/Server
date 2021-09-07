@@ -1,24 +1,22 @@
 const express = require('express');
 const router = express.Router();
+const upload = require('../Middleware/Upload');
 const Conversation = require('../models/Conversation');
 
 
 
 // new Conversation
-router.post('/conversation', async (req, res) => {
+router.post('/conversation', upload.fields([]), async (req, res) => {
     try {
         const conversation = await Conversation.find({
-            $and: [
-                {
-                    members: { $in: [req.body.senderId] },
-                    members: { $in: [req.body.receiverId] },
-
+            $and: [{
+                members: {
+                    $in: [req.body.senderId],
+                    $in: [req.body.receiverId]
                 }
-            ]
+            }]
 
         })
-
-        console.log(conversation.length)
         if (conversation.length === 0) {
             const newConversation = new Conversation({
                 members: [req.body.senderId, req.body.receiverId],
@@ -28,7 +26,7 @@ router.post('/conversation', async (req, res) => {
 
         }
         else {
-            res.status(300).json('This conversation already exists')
+            res.json('This conversation already exists')
             console.log('This conversation already exists')
         }
     }
@@ -40,7 +38,7 @@ router.post('/conversation', async (req, res) => {
 })
 
 //get conversation of a User
-router.get("/conversation/:id", async (req, res) => {
+router.get("/conversation/:id", upload.fields([]), async (req, res) => {
     try {
         const conversation = await Conversation.find({
             members: {
@@ -55,20 +53,27 @@ router.get("/conversation/:id", async (req, res) => {
 })
 
 
-router.get('/getconversation', async (req, res) => {
+router.get('/getconversation', upload.fields([]), async (req, res) => {
+    console.log(req.query.senderId)
+    console.log(req.query.receiverId)
     try {
-        const conversation = await Conversation.find({
+        await Conversation.find({
             $and: [{
                 members: {
-                    $in: [req.body.senderId],
-                    $in: [req.body.receiverId]
+                    $in: [req.query.senderId],
+                    $in: [req.query.receiverId]
                 }
             }]
+        }).then((data) => {
+            res.status(200).json(data)
+            console.log(data)
         })
-        res.status(200).json(conversation)
+
     }
     catch (err) {
         console.log(err)
     }
 })
+
+
 module.exports = router;

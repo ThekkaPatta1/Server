@@ -2,14 +2,14 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 const FavWorker = require('../models/FavWorker_model');
 const router = express.Router();
-const upload = require('../Middleware/Upload'); 
+const upload = require('../Middleware/Upload');
 
 const auth = require('../Middleware/Authenticate');
 
 router.post('/favworker/insert', upload.single('ProfileImg'), function async(req, res) {
     console.log(req.body)
     const errors = validationResult(req);
-   if (errors.isEmpty) {
+    if (errors.isEmpty) {
         //valid
         const WFullName = req.body.WFullName;
         const WAddress = req.body.WAddress;
@@ -18,8 +18,8 @@ router.post('/favworker/insert', upload.single('ProfileImg'), function async(req
         const WUsername = req.body.WUsername;
         const UUsername = req.body.UUsername;
         const ProfileImg = req.body.ProfileImg;
-       
-        
+
+
 
         const data = new FavWorker({
             WFullName: WFullName,
@@ -29,9 +29,9 @@ router.post('/favworker/insert', upload.single('ProfileImg'), function async(req
             WUsername: WUsername,
             UUsername: UUsername,
             ProfileImg: "/" + ProfileImg
-            
+
         })
-        
+
         data.save()
             .then(function (result) {
                 console.log(data);
@@ -56,13 +56,16 @@ router.get('/favworker/show', function (req, res) {
         // console.log(data);
         res.send(data);
     })
+    .catch((err)=>{
+        console.log(err)
+    })
 })
 
 
 router.get('/favworker/single/:wn', function (req, res) {
-       FavWorker.findOne({ WUsername: req.params.wn })
+    FavWorker.findOne({ WUsername: req.params.wn })
         .then(function (_id) {
-           
+
             res.status(200).json(data);
         })
         .catch(function (e) {
@@ -71,30 +74,30 @@ router.get('/favworker/single/:wn', function (req, res) {
 })
 
 
-router.get('/fav/worker/:un', function(req, res){
-   
-    FavWorker.find({UUsername:req.params.un})
-    .then(data=>{
-                res.status(200).json({
-                    data 
-                })
-                console.log(data)
-            }).catch(err=>{
-                res.status(400).json({error:err})
+router.get('/fav/worker/:un', function (req, res) {
+
+    FavWorker.find({ UUsername: req.params.un })
+        .then(data => {
+            res.status(200).json({
+                data
             })
+            console.log(data)
+        }).catch(err => {
+            res.status(400).json({ error: err })
+        })
 })
 
 // for delete
-router.delete('/favworker/delete/:id',  function (req, res) {
+router.delete('/favworker/delete/:id', function (req, res) {
     //delete code
     const id = req.params.id;
     FavWorker.deleteOne({ _id: id })
-    .then(res=>  {
-        res.status(200).json({ message: "Remove From favorites !!!!" })
-    })
-    .catch(err=>{
-        res.status(400).json({error:err})
-    })
+        .then(res => {
+            res.status(200).json({ message: "Remove From favorites !!!!" })
+        })
+        .catch(err => {
+            res.status(400).json({ error: err })
+        })
 
 })
 

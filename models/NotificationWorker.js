@@ -23,8 +23,11 @@ const NotiWorker = mongoose.model('NotiWorker',{
     Wtitle:{
         type:String,
     },
-    Hiretime:{
+    Hireratetime:{
         type:Date,
+    },
+    Ratenum:{
+        type:Number,
     }
 })
 module.exports= NotiWorker;

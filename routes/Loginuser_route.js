@@ -21,8 +21,6 @@ router.post('/user/insert', upload.single('ProfileImg'), function async(req, res
         const UPassword = req.body.UPassword;
         const ProfileImg = req.file.path;
 
-        // console.log(us);
-        // console.log(add); 
         bcryptjs.hash(UPassword, 10, function (err, hash) {
             const data = new User({
                 UFullName: UFullName,
@@ -89,19 +87,13 @@ router.post('/user/login', function (req, res) {
 
 //showing users
 router.get('/user/show', function (req, res) {
-    // console.log("this is for showing data")
-    // res.send("test show")
     User.find().then(function (data) {
-        // console.log(data);
         res.send(data);
     })
 })
 
-
+//getting single user
 router.get('/user/single/:id', function (req, res) {
-    // console.log("this is for showing data")
-    // res.send("test show")
-    //console.log(req.body)
     User.findOne({ _id: req.params.id })
         .then(function (data) {
             res.status(200).json(data);
@@ -111,9 +103,9 @@ router.get('/user/single/:id', function (req, res) {
         })
 })
 
+
 // for delete
 router.delete('/user/delete/:id', function (req, res) {
-    //delete code
     const id = req.params.id;
     User.deleteOne({ _id: id })
         .then((res)=> {
@@ -124,6 +116,7 @@ router.delete('/user/delete/:id', function (req, res) {
         })
 
 })
+
 // for update
 router.post('/user/update/:_id', function (req, res) {
     const _id = req.params._id;

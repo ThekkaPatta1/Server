@@ -54,16 +54,25 @@ router.post('/hire/worker', upload.fields([]), (req, res) => {
         })
 })
 
-router.post('/complete/work/id', upload.fields([]), (req, res) => {
-    Work.updateOne({ _id: req.body.id }, { status: "Completed"})
+router.post('/complete/work/:id', upload.fields([]), (req, res) => {
+    Work.updateOne({ _id: req.params.id }, { status: "Completed"})
     .then(function(){
         res.status(200).json({message:'Work completed'})
+        console.log('afaoenfaefa')
     })
 })
 
 
 router.get('/workhistory/:WUsername', (req, res) => {
     Work.find({Worker : req.params.WUsername }).then(data => {
+        res.status(200).json({data})
+    }).catch(err => {
+        res.status(400).json({ error: err })
+    })
+})
+
+router.get('/work/history/:UUsername', (req, res) => {
+    Work.find({Username : req.params.UUsername }).then(data => {
         res.status(200).json({data})
     }).catch(err => {
         res.status(400).json({ error: err })

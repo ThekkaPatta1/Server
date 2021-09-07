@@ -15,7 +15,8 @@ router.post('/bid/post', upload.fields([]), function (req, res) {
         //valid
         const UUsername = req.body.UUsername
         const WUsername = req.body.WUsername;
-        const Wid = req.body.Wid;
+        const Workid = req.body.Wid;
+        const Wtitle = req.body.Wtitle;
         const Bidprice = req.body.Bidprice;
         const Worktime = req.body.Worktime;
         const nType = req.body.nType;
@@ -23,14 +24,17 @@ router.post('/bid/post', upload.fields([]), function (req, res) {
         const data = new Bid({
             UUsername: UUsername,
             WUsername: WUsername,
-            Wid: Wid,
+            Wid: Workid,
+            Wtitle: Wtitle,
             Bidprice: Bidprice,
             Worktime: Worktime,
+            Bidtime: dtnow
         });
         const data2 = new NotiUser({
             UUsername: UUsername,
             WUsername: WUsername,
-            Wtitle: Wid,
+            Workid: Workid,
+            Wtitle: Wtitle,
             Bidtime: dtnow,
             nType: nType
         });
@@ -54,17 +58,17 @@ router.get('/works/bidder/:id', (req, res) => {
     Bid.find({ Wid: req.params.id }).then(data => {
         res.status(200).json(data)
         console.log(data)
-    }).catch(err => {
+    }).catch((err) => {
         res.status(400).json({ error: err })
     })
 })
 
 
 // for showing work for a worker where they have already bidded
-router.get('/bidded/work/:un',function(req, res){
-    const WUsername=req.params.un
-    Bid.find({WUsername: WUsername})
-        .then(function(data){
+router.get('/bidded/work/:un', function (req, res) {
+    const WUsername = req.params.un
+    Bid.find({ WUsername: WUsername })
+        .then(function (data) {
             console.log(data)
             res.status(200).json(data);
 

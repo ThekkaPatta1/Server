@@ -77,7 +77,8 @@ router.post('/worker/login', function (req, res) {
                     // message: "Success !!",
                     success: true,
                     token: token,
-                    _id: userData1._id
+                    _id: userData1._id,
+                    WUsername: userData1.WUsername
                 })
             })
         })
@@ -85,17 +86,13 @@ router.post('/worker/login', function (req, res) {
             res.status(500).json({ message: e })
         })
 })
-
 router.get('/worker/show', function (req, res) {
-    // console.log("this is for showing data")
-    // res.send("test show")
     Worker.find().then(function (data) {
-        // console.log(data);
         res.send(data);
     })
 })
 
-
+//getting single worker
 router.get('/worker/single/:id', function (req, res) {
 
     Worker.findOne({ _id: req.params.id })
@@ -107,6 +104,7 @@ router.get('/worker/single/:id', function (req, res) {
             res.status(500).json({ error: e })
         })
 })
+
 
 router.get('/worker/one/:un', function (req, res) {
     Worker.findOne({ WUsername: req.params.un })
@@ -133,6 +131,7 @@ router.delete('/worker/delete/:id', function (req, res) {
         })
 
 })
+
 // for update
 router.post('/worker/update/:_id', function (req, res) {
     console.log(req.body)

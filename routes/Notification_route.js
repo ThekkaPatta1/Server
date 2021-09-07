@@ -15,7 +15,7 @@ router.get('/notifications/user/:un', (req, res) => {
         })
 })
 router.get('/notifications/worker/:un', (req, res) => {
-    NotiWorker.find({ WUsername: req.params.un })
+    NotiWorker.find({ WUsername: req.params.un }).sort({'Hireratetime':-1})
         .then(data => {
             res.status(200).json({ data })
         }).catch(err => {
@@ -25,23 +25,24 @@ router.get('/notifications/worker/:un', (req, res) => {
 
 router.post('/post/notification', upload.fields([]), function (req, res) {
     console.log("Worker notification in progress")
-    // const dtnow = new Date()
-    // console.log(dtnow);
+    const dtnow = new Date()
     const errors = validationResult(req);
 
     if (errors.isEmpty) {
         //valid
         const UUsername = req.body.UUsername
         const WUsername = req.body.WUsername;
-        const Wid = req.body.Workid;
+        const Workid = req.body.Workid;
         const nType = req.body.nType;
-        console.log(UUsername,WUsername,Wid,nType)
+        const Wtitle= req.body.Wtitle;
 
         const data = new NotiWorker({
             UUsername: UUsername,
             WUsername: WUsername,
-            Workid: Wid,
-            nType: nType
+            Workid: Workid,
+            Wtitle:Wtitle,
+            nType: nType,
+            Hireratetime: dtnow
         })
         data.save()
             .then(function (result) {
