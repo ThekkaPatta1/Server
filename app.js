@@ -5,9 +5,6 @@ const cors = require('cors');
 
 const connectDB  = require('./database/db');
 
-
-
-
 const Loginuser_route = require('./routes/Loginuser_route');
 const Loginworker_route = require('./routes/Loginworker_route');
 const workpost_route = require('./routes/workpost_route');
@@ -43,9 +40,5 @@ app.use(FavWorker_route);
 app.use(Conversation_route);
 app.use(Message_route)
 
-
-app.listen(process.env.PORT);   
-app.listen(550); 
-
-
-
+app.listen(550);
+// app.listen(process.env.PORT);   
