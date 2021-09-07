@@ -1,5 +1,6 @@
 // use the path of your model
-const user = require('../models/user_model');
+const foruser = require('../models/user_model');
+
 // const worker = require('../models/worker_model')
 const mongoose = require('mongoose');
 // use the new name of the database
@@ -25,7 +26,7 @@ describe('Register Test', () => {
  'UPassword':'agraj'
  };
  
- return user.create(User)
+ return foruser.create(User)
  .then((pro_ret) => {
 expect(pro_ret.UFullName).toEqual('Agraj Poudel');
 expect(pro_ret.UAddress).toEqual('Baluwatar');
@@ -35,3 +36,45 @@ expect(pro_ret.UPassword).toEqual('agraj');
  });
  });
 })
+
+//login user test
+
+it("User Login testing", async()=>{
+    const User ={
+        "UUsername":"agraj",
+        "UPassword":"agraj"
+    }
+    return foruser.findOne({User});
+
+})
+ //update user profile
+
+it("Update User profile", async()=>{
+    const pro = await foruser.updateOne({
+        "_id":Object("6106bbe05686975e304ef5e3")
+    },
+    {
+        $set:{
+            "UPhoneNo":"981818181",
+            "UAddress":"test"
+        }
+    })
+    expect(pro.ok).toBe(1)
+
+}
+)
+
+//delete user profile
+
+it("delete profile",async()=>{
+    const status = await foruser.deleteOne({
+        "_id":Object("6106bbe05686975e304ef5e3")
+    });
+    expect(status.ok).toBe(1);
+}
+)
+
+
+
+
+
