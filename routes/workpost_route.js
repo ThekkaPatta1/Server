@@ -8,7 +8,7 @@ const upload = require('../Middleware/Upload');
 const auth = require('../Middleware/Authenticate')
 
 //posting work 
-router.post('/work/post', upload.single('ProfileImg'),function (req, res) {
+router.post('/work/post', upload.single('WorkImg'),function (req, res) {
     console.log(req.body)
     const errors = validationResult(req);
 
@@ -28,7 +28,7 @@ router.post('/work/post', upload.single('ProfileImg'),function (req, res) {
                 Workdescription: Workdescription,
                 WorkTitle:WorkTitle,
                 status:status,
-                ProfileImg:"/"+req.file.filename,
+                WorkImg:"/"+req.file.filename,
             });
             data.save()
                 .then(function (result) {
