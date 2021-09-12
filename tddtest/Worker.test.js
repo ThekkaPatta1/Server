@@ -1,5 +1,6 @@
 // use the path of your model
-const user = require('../models/worker_model');
+const workerss = require('../models/worker_model');
+
 // const worker = require('../models/worker_model')
 const mongoose = require('mongoose');
 // use the new name of the database
@@ -26,7 +27,7 @@ describe('Register Test', () => {
  'WPassword':'agraj'
  };
  
- return user.create(Worker)
+ return workerss.create(Worker)
  .then((pro_ret) => {
 expect(pro_ret.WFullName).toEqual('Agraj Poudel');
 expect(pro_ret.WAddress).toEqual('Baluwatar');
@@ -37,3 +38,41 @@ expect(pro_ret.WPassword).toEqual('agraj');
  });
  });
 })
+
+//login testing
+
+it("Worker Login testing", async()=>{
+    const Worker ={
+        "WUsername":"pode",
+        "WPassword":"pode"
+    }
+    return workerss.findOne({Worker});
+
+})
+
+//update worker profile testing
+
+it("Update worker profile", async()=>{
+    const pro = await workerss.updateOne({
+        "_id":Object("6118d192ecd6f745f886a9b0")
+    },
+    {
+        $set:{
+            "WPhoneNo":"981818181",
+            "WAddress":"test"
+        }
+    })
+    expect(pro.ok).toBe(1)
+
+}
+)
+
+//delete profile
+
+it("delete profile",async()=>{
+    const status = await workerss.deleteOne({
+        "_id":Object("6118d192ecd6f745f886a9b0")
+    });
+    expect(status.ok).toBe(1);
+}
+)
